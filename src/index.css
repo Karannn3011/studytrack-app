@@ -1,0 +1,13 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light, dark;
+}
+
+@custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
+
+@theme {
+  --font-inter: 'Inter', sans-serif;
+}
