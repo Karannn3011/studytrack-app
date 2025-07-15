@@ -1,9 +1,0 @@
-<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-  <!-- Progress bars -->
-  <rect x="10" y="28" width="6" height="20" rx="1" fill="#64B5F6"/>
-  <rect x="20" y="18" width="6" height="30" rx="1" fill="#42A5F5"/>
-  <rect x="30" y="23" width="6" height="25" rx="1" fill="#1E88E5"/>
-  
-  <!-- Checkmark -->
-  <polyline points="40,36 48,44 60,28" fill="none" stroke="#2196F3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>

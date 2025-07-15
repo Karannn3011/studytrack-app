@@ -32,11 +32,6 @@ function Body(props) {
     );
     return progress;
   };
-  useEffect(() => {
-    if (selectedSubject) {
-      console.log("Selected: " + selectedSubject.subname);
-    }
-  }, [selectedSubject]);
   function handleNewSubAdd(e) {
     e.preventDefault();
     const subnametemp = document.getElementById("subjectname").value.trim();
@@ -181,7 +176,7 @@ function Body(props) {
             className="bg-base-100 border-base-300 overflow-x-scroll w-full collapse border"
           >
             <input type="checkbox" className="peer" />
-            <div className="collapse-title md:pt-6 md:pb-8 w-full grid grid-cols-2 md:grid-rows-[auto_20px] md:grid-cols-3 grid-rows-2 bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
+            <div className="collapse-title md:pt-6 md:pb-6 w-full grid grid-cols-2 md:grid-rows-[auto_20px] md:grid-cols-3 grid-rows-2 bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
               <div className="justify-self-start col-start-1 row-start-1">
                 <p className="font-bold text-4xl font-arial">{e.subname}</p>
               </div>
@@ -260,7 +255,7 @@ function Body(props) {
                 </div>
               </div>
             </div>
-            <div className="collapse-content md:pt-4 w-full grid grid-cols-2 md:grid-cols-3 md:grid-rows-[40px_auto] gap-y-3 grid-rows-[50px_50px_auto] bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
+            <div className="collapse-content w-full grid grid-cols-2 md:grid-cols-3 md:grid-rows-[40px_auto] gap-y-3 grid-rows-[50px_50px_auto] bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
               <div className="row-start-1 md:col-span-1  justify-self-center md:justify-self-start col-span-2 w-full ">
                 <div className="flex justify-center md:justify-start *:w-full"><button
                   id={`resbtn-${e.id}`}
@@ -269,7 +264,7 @@ function Body(props) {
 
                     document.getElementById("my_modal_6").showModal();
                   }}
-                  className="btn md:w-[95%] max-w-60"
+                  className="btn md:w-[95%] max-w-75 md:max-w-60"
                 >
                   <FontAwesomeIcon icon={faNoteSticky} />
                   Resources

@@ -1,27 +1,22 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import Header from "./Header";
 import Body from "./Body";
 import { SubjectProvider, useSubject } from "./SubjectContext";
 import { Dialog3, Dialog4, Dialog5, Dialog6, Dialog7, Dialog8 } from "./Dialog";
 
 const App = () => {
-  // Theme and user state
+
   const [theme, setTheme] = useState("light");
   const [userName, setUsername] = useState(
     () => localStorage.getItem("userName") || ""
   );
 
-  // Subjects state
+
   const [subjects, setSubjects] = useState(() => {
     const stored = localStorage.getItem("subjects");
     return stored ? JSON.parse(stored) : [];
   });
 
-  // Get selectedSubject from context (must be inside SubjectProvider)
-  // This will work because Dialogs and Body use the context
-  // const { selectedSubject } = useSubject(); // Only needed if you use it here
-
-  // Effects for localStorage and theme
   useEffect(() => {
     localStorage.setItem("userName", userName);
   }, [userName]);
@@ -34,7 +29,6 @@ const App = () => {
     document.querySelector("html").setAttribute("data-theme", theme);
   }, [theme]);
 
-  // Resource add handler (actual logic should be in Dialog7)
   const handleNewResourceAdd = (selectedSubject) => {
     const resName = document.getElementById("resourceName").value.trim();
     const resLink = document.getElementById("resourceLink").value.trim();
@@ -136,6 +130,7 @@ const App = () => {
       <Dialog6 handleResourceDelete={handleResourceDelete} />
       <Dialog7 handleNewResourceAdd={handleNewResourceAdd} />
       <Dialog8 />
+      <Dialog4 />
     </SubjectProvider>
   );
 };

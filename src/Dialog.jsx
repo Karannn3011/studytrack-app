@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf, faNewspaper } from "@fortawesome/free-solid-svg-icons";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 import { useState, useEffect } from "react";
+import logonew from "./assets/logonew.png";
 
 export function Dialog1(props) {
   return (
@@ -107,9 +108,10 @@ export function Dialog3() {
 
   return (
     <dialog id="my_modal_3" className="modal">
-      <div className="modal-box">
+      <div className="modal-box ">
         <h3 className="font-bold text-lg">Subject Description</h3>
-        <p className="py-4">{selectedSubject?.subdesc || " "}</p>
+        <div className="w-[90%]"></div>
+        <p className="py-4 w-full">{selectedSubject?.subdesc || " "}</p>
         <div className="modal-action">
           <form method="dialog">
             <button className="btn">Close</button>
@@ -124,14 +126,22 @@ export function Dialog4() {
   return (
     <dialog id="my_modal_4" className="modal">
       <div className="modal-box">
-        <form method="dialog">
-          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-            ✕
-          </button>
-        </form>
-        <h3 className="font-bold text-lg">Hello!</h3>
-        <p className="py-4">Press ESC key or click on ✕ button to close</p>
+        <img src={logonew} alt="StudyTrack" className="w-1/2 mx-auto" />
+        <p className="py-4 text-sm md:text-md">
+          StudyTrack helps you organize your learning by allowing you to create
+          subjects, add topics, and track your progress visually. You can attach
+          resources like videos, PDFs, and articles to each subject, add
+          personal notes, and mark topics as completed or starred for easy
+          revision. The app provides a simple interface to manage your study
+          workflow and keep all your materials in one place.
+        </p>
+        <p className="text-center mt-3">
+          Made by: <a href="https://github.com/Karannn3011">Karannn3011</a>
+        </p>
       </div>
+      <form method="dialog" className="modal-backdrop">
+        <button>close</button>
+      </form>
     </dialog>
   );
 }
@@ -142,14 +152,10 @@ export function Dialog5(props) {
     <>
       <dialog id="my_modal_5" className="modal">
         <div className="modal-box">
-          
           <fieldset className="fieldset bg-base-200 border-base-300 w-full rounded-box border p-4">
             <legend className="fieldset-legend text-xl">Topic</legend>
             <div className="">
-              <form
-                className="flex gap-x-10"
-            
-              >
+              <form className="flex gap-x-10">
                 <input
                   id="newtopicname"
                   type="text"
@@ -158,8 +164,9 @@ export function Dialog5(props) {
                 />
                 <button
                   type="submit"
-                  onClick={(e) =>{ e.preventDefault()
-                    props.handleNewTopicAdd(selectedSubject)
+                  onClick={(e) => {
+                    e.preventDefault();
+                    props.handleNewTopicAdd(selectedSubject);
                   }}
                   className="btn"
                 >
@@ -170,10 +177,10 @@ export function Dialog5(props) {
           </fieldset>
         </div>
         <form method="dialog" className="modal-backdrop">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-              ✕
-            </button>
-          </form>
+          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            ✕
+          </button>
+        </form>
       </dialog>
     </>
   );
