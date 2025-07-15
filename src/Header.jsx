@@ -39,7 +39,9 @@ function Header({ theme, setTheme }) {
                 
               </li>
               <li>
-                <button className="btn">GitHub</button>
+                <a target="_blank"
+                            rel="noopener noreferrer" href="https://github.com/Karannn3011/studytrack-app">
+                <button className="btn">GitHub</button></a>
               </li>
               <li>
                 <div className="btn">
@@ -116,7 +118,9 @@ function Header({ theme, setTheme }) {
 
               </li>
               <li>
-                <button className="btn">GitHub</button>
+                <a target="_blank"
+                            rel="noopener noreferrer" href="https://github.com/Karannn3011/studytrack-app">
+                <button className="btn">GitHub</button></a>
               </li>
               <li>
                 <div className="btn">

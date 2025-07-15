@@ -136,7 +136,8 @@ export function Dialog4() {
           workflow and keep all your materials in one place.
         </p>
         <p className="text-center mt-3">
-          Made by: <a href="https://github.com/Karannn3011">Karannn3011</a>
+          Made by: <a target="_blank"
+                            rel="noopener noreferrer" href="https://github.com/Karannn3011">Karannn3011</a>
         </p>
       </div>
       <form method="dialog" className="modal-backdrop">
