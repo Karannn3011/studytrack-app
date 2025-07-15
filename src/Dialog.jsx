@@ -1,4 +1,8 @@
 import { useSubject } from "./SubjectContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilePdf, faNewspaper } from "@fortawesome/free-solid-svg-icons";
+import { faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { useState, useEffect } from "react";
 
 export function Dialog1(props) {
   return (
@@ -133,39 +137,49 @@ export function Dialog4() {
 }
 
 export function Dialog5(props) {
+  const { selectedSubject } = useSubject();
   return (
     <>
       <dialog id="my_modal_5" className="modal">
         <div className="modal-box">
-          <form method="dialog">
+          
+          <fieldset className="fieldset bg-base-200 border-base-300 w-full rounded-box border p-4">
+            <legend className="fieldset-legend text-xl">Topic</legend>
+            <div className="">
+              <form
+                className="flex gap-x-10"
+            
+              >
+                <input
+                  id="newtopicname"
+                  type="text"
+                  className="input "
+                  placeholder="Topic Name"
+                />
+                <button
+                  type="submit"
+                  onClick={(e) =>{ e.preventDefault()
+                    props.handleNewTopicAdd(selectedSubject)
+                  }}
+                  className="btn"
+                >
+                  Add
+                </button>
+              </form>
+            </div>
+          </fieldset>
+        </div>
+        <form method="dialog" className="modal-backdrop">
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
             </button>
           </form>
-          <fieldset className="fieldset bg-base-200 border-base-300 w-full rounded-box border p-4">
-            <legend className="fieldset-legend text-xl">Topic</legend>
-            <div className="join gap-x-10">
-              <input
-                id="newtopicname"
-                type="text"
-                className="input join-item"
-                placeholder="Topic Name"
-              />
-              <button
-                onClick={() => props.handleNewTopicAdd(props.subid)}
-                className="btn join-item"
-              >
-                Add
-              </button>
-            </div>
-          </fieldset>
-        </div>
       </dialog>
     </>
   );
 }
 
-export function Dialog6() {
+export function Dialog6(props) {
   const { selectedSubject } = useSubject();
   return (
     <>
@@ -183,11 +197,63 @@ export function Dialog6() {
                 No resources added yet.
               </p>
             ) : (
-              <ul>
-                {(selectedSubject.resources || []).map((res, idx) => (
-                  <li key={idx}>{res}</li>
-                ))}
-              </ul>
+              <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+                <table className="table">
+                  {/* head */}
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Name</th>
+                      <th>Link</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(selectedSubject.resources || []).map((res, idx) => (
+                      <tr key={res.id || idx}>
+                        <th>{idx + 1}</th>
+                        <td>{res.name}</td>
+                        <td>
+                          <a
+                            href={res.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title={res.type}
+                            className="*:scale-150"
+                          >
+                            {res.type === "PDF" && (
+                              <FontAwesomeIcon icon={faFilePdf} />
+                            )}
+                            {res.type === "Video" && (
+                              <FontAwesomeIcon icon={faYoutube} />
+                            )}
+                            {res.type === "Article" && (
+                              <FontAwesomeIcon icon={faNewspaper} />
+                            )}
+                            {/* fallback if type is unknown */}
+                            {!["PDF", "Video", "Article"].includes(
+                              res.type
+                            ) && <FontAwesomeIcon icon={faNewspaper} />}
+                          </a>
+                        </td>
+                        <td>
+                          <btn
+                            onClick={() =>
+                              props.handleResourceDelete(
+                                res.id,
+                                selectedSubject
+                              )
+                            }
+                            className="btn btn-xs"
+                          >
+                            X
+                          </btn>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             )}
           </div>
           <div className="flex justify-between">
@@ -214,7 +280,7 @@ export function Dialog6() {
 }
 
 export function Dialog7(props) {
-  const {selectedSubject} = useSubject();
+  const { selectedSubject } = useSubject();
   return (
     <>
       <dialog id="my_modal_7" className="modal">
@@ -226,7 +292,7 @@ export function Dialog7(props) {
 
             <label className="label">Name</label>
             <input
-            id="resourceName"
+              id="resourceName"
               type="text"
               className="input"
               placeholder="Eg: Lecture 1 - Introduction to Arrays"
@@ -235,7 +301,7 @@ export function Dialog7(props) {
 
             <label className="label">Link</label>
             <input
-            id="resourceLink"
+              id="resourceLink"
               type="url"
               className="input"
               placeholder="https://youtube.com/...."
@@ -252,7 +318,7 @@ export function Dialog7(props) {
           </fieldset>
           <div className="flex justify-between mt-4">
             <button
-              onClick={props.handleNewResourceAdd}
+              onClick={() => props.handleNewResourceAdd(selectedSubject)}
               className="btn"
             >
               + Add
@@ -270,5 +336,42 @@ export function Dialog7(props) {
         </form>
       </dialog>
     </>
+  );
+}
+
+export function Dialog8(props) {
+  const [localRemark, setLocalRemark] = useState("");
+  useEffect(() => {
+    setLocalRemark(props.topic?.remark || "");
+  }, [props.topic]);
+
+  return (
+    <dialog id="my_modal_8" className="modal">
+      <div className="modal-box">
+        <fieldset className="fieldset text-base-content bg-base-200 border-base-300 rounded-box w-full border p-4">
+          <legend className="fieldset-legend text-xl">Remarks</legend>
+          <label className="label text-lg">Notes (Edit to change)</label>
+          <textarea
+            id="remarkinput"
+            value={localRemark}
+            onChange={(e) => setLocalRemark(e.target.value)}
+            onBlur={(e) =>
+              props.handleRemarkChange(props.topic?.id, e.target.value)
+            }
+            className="textarea w-full text-base-content"
+            placeholder="Bio"
+          ></textarea>
+        </fieldset>
+        <button
+          onClick={() => document.getElementById("my_modal_8").close()}
+          className="btn w-full mt-3"
+        >
+          Close
+        </button>
+      </div>
+      <form method="dialog" className="modal-backdrop">
+        <button>close</button>
+      </form>
+    </dialog>
   );
 }
